@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "editorconfig.editorconfig",
+        "golang.go",
+        "aykutsarac.jsoncrack-vscode",
+        "humao.rest-client",
+        "yzhang.markdown-all-in-one",
+        "vscode-icons-team.vscode-icons"
+    ]
+}

@@ -1,0 +1,5 @@
+dir: internal
+all: True
+# keeptree: True
+# inpackage: True
+case: underscore

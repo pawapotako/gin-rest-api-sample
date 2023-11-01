@@ -1,0 +1,270 @@
+definitions:
+  rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_GetUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/rename-service-name-here_internal_model.GetUserResponse'
+    type: object
+  rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_NewUserRequest:
+    properties:
+      data:
+        $ref: '#/definitions/rename-service-name-here_internal_model.NewUserRequest'
+    type: object
+  rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_NewUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/rename-service-name-here_internal_model.NewUserResponse'
+    type: object
+  rename-service-name-here_internal_model.GetUserResponse:
+    description: Detailed description for get User response
+    properties:
+      createdDate:
+        type: string
+      createdUserId:
+        type: integer
+      email:
+        type: string
+      employeeCode:
+        type: string
+      id:
+        type: integer
+      isActive:
+        type: boolean
+      nameEnglish:
+        type: string
+      nameThai:
+        type: string
+      surnameEnglish:
+        type: string
+      surnameThai:
+        type: string
+      updatedDate:
+        type: string
+      updatedUserId:
+        type: integer
+      userLogin:
+        type: string
+    type: object
+  rename-service-name-here_internal_model.NewUserRequest:
+    description: Detailed description for new User request
+    properties:
+      createdUserId:
+        type: integer
+      email:
+        type: string
+      employeeCode:
+        type: string
+      isActive:
+        type: boolean
+      nameEnglish:
+        type: string
+      nameThai:
+        type: string
+      surnameEnglish:
+        type: string
+      surnameThai:
+        type: string
+      userLogin:
+        type: string
+    required:
+    - email
+    - employeeCode
+    - nameThai
+    - surnameThai
+    - userLogin
+    type: object
+  rename-service-name-here_internal_model.NewUserResponse:
+    description: Detailed description for new User response
+    properties:
+      id:
+        type: integer
+    type: object
+  rename-service-name-here_internal_util.AppErrors:
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/rename-service-name-here_internal_util.ItemError'
+        type: array
+    type: object
+  rename-service-name-here_internal_util.ItemError:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /health-check:
+    get:
+      consumes:
+      - application/json
+      description: Check if the API server is running
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Check API health
+      tags:
+      - Health Check
+  /v1/users:
+    get:
+      consumes:
+      - application/json
+      description: Sends a GET request to get user by paging
+      parameters:
+      - description: page
+        in: query
+        name: page
+        required: true
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        required: true
+        type: string
+      - description: sort
+        in: query
+        name: sort
+        type: string
+      - description: employeeCode
+        in: query
+        name: employeeCode
+        type: string
+      - description: userFullname
+        in: query
+        name: userFullname
+        type: string
+      - description: userLogin
+        in: query
+        name: userLogin
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+      summary: Get user by paging with a Get request
+      tags:
+      - User
+    patch:
+      consumes:
+      - application/json
+      description: Sends a PATCH request to Update User
+      parameters:
+      - description: User Request
+        in: body
+        name: userRequest
+        required: true
+        schema:
+          $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_NewUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+      summary: Update User with a PATCH request
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Sends a POST request to create User
+      parameters:
+      - description: User Request
+        in: body
+        name: userRequest
+        required: true
+        schema:
+          $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_NewUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_NewUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+      summary: Create User with a POST request
+      tags:
+      - User
+  /v1/users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Sends a GET request to get user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_model.DefaultPayload-rename-service-name-here_internal_model_GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rename-service-name-here_internal_util.AppErrors'
+      summary: Get user with a Get request
+      tags:
+      - User
+swagger: "2.0"

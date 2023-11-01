@@ -1,0 +1,6 @@
+# IDE:
+.vscode
+
+# Go Artifacts:
+vendor
+mocks

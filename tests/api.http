@@ -1,0 +1,56 @@
+@host = localhost
+@port = 8080
+@api_version_v1 = v1
+
+@userEndpoint = users
+
+### GET /health-check
+GET http://{{host}}:{{port}}/health-check
+
+### GET /users
+GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}?page=1&limit=30
+
+### GET /users Search by details
+GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}?page=1&limit=31&employeeCode=&userFullname=&userLogin=
+
+### GET /users/:id
+GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}/3
+
+### POST /users
+POST http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}
+Content-Type: application/json
+
+{
+    "data":
+    {
+        "userLogin":"005",
+        "employeeCode":"0005",
+        "email":"EE.gmail.com",
+        "nameThai":"นายอี",
+        "surnameThai":"นามสกุลอีอี",
+        "nameEnglish":"E",
+        "surnameEnglish":"EE",
+        "isActive":true,
+        "createdUserId":1
+    }
+}
+
+### PATCH /Users
+PATCH http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}
+Content-Type: application/json
+
+{
+    "data":
+    {
+        "id":1,
+        "userLogin":"005",
+        "employeeCode":"0005",
+        "email":"EE.gmail.com",
+        "nameThai":"นายอี",
+        "surnameThai":"นามสกุลอีอี",
+        "nameEnglish":"E",
+        "surnameEnglish":"EE",
+        "isActive":true,
+        "updatedUserId":1
+    }
+}
