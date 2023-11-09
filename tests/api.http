@@ -1,56 +1,79 @@
 @host = localhost
 @port = 8080
 @api_version_v1 = v1
-
-@userEndpoint = users
+@authenticationEndpoint = authentications
 
 ### GET /health-check
 GET http://{{host}}:{{port}}/health-check
+Accept-Language: en_US
 
-### GET /users
-GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}?page=1&limit=30
-
-### GET /users Search by details
-GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}?page=1&limit=31&employeeCode=&userFullname=&userLogin=
-
-### GET /users/:id
-GET http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}/3
-
-### POST /users
-POST http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}
+### POST /covid/summary
+POST http://{{host}}:{{port}}/covid/summary
 Content-Type: application/json
+Accept-Language: en_US
+
+{
+    "data": [
+      {
+        "confirmDate": "2021-05-04",
+        "no": null,
+        "age": 51,
+        "gender": "หญิง",
+        "genderEn": "Female",
+        "nation": null,
+        "nationEn": "China",
+        "province": "Phrae",
+        "provinceId": 46,
+        "district": null,
+        "provinceEn": "Phrae",
+        "statQuarantine": 5
+      },
+      {
+        "confirmDate": "2021-05-01",
+        "no": null,
+        "age": 51,
+        "gender": "ชาย",
+        "genderEn": "Male",
+        "nation": null,
+        "nationEn": "India",
+        "province": "Suphan Buri",
+        "provinceId": 65,
+        "district": null,
+        "provinceEn": "Suphan Buri",
+        "statQuarantine": 8
+      },
+      {
+        "confirmDate": "2021-05-01",
+        "no": null,
+        "age": 79,
+        "gender": null,
+        "genderEn": null,
+        "nation": null,
+        "nationEn": "India",
+        "province": "Roi Et",
+        "provinceId": 53,
+        "district": null,
+        "provinceEn": "Roi Et",
+        "statQuarantine": 1
+      }
+    ]
+  }
+
+### POST /authentications/sign-in
+POST http://{{host}}:{{port}}/{{api_version_v1}}/{{authenticationEndpoint}}/sign-in
+Content-Type: application/json
+Accept-Language: en_US
 
 {
     "data":
     {
-        "userLogin":"005",
-        "employeeCode":"0005",
-        "email":"EE.gmail.com",
-        "nameThai":"นายอี",
-        "surnameThai":"นามสกุลอีอี",
-        "nameEnglish":"E",
-        "surnameEnglish":"EE",
-        "isActive":true,
-        "createdUserId":1
+        "username":"parnupong.p@frasersproperty.com",
+        "password":"Parnupong1992"
     }
 }
 
-### PATCH /Users
-PATCH http://{{host}}:{{port}}/{{api_version_v1}}/{{userEndpoint}}
+### GET /authentications/sign-out
+GET http://{{host}}:{{port}}/{{api_version_v1}}/{{authenticationEndpoint}}/sign-out
 Content-Type: application/json
-
-{
-    "data":
-    {
-        "id":1,
-        "userLogin":"005",
-        "employeeCode":"0005",
-        "email":"EE.gmail.com",
-        "nameThai":"นายอี",
-        "surnameThai":"นามสกุลอีอี",
-        "nameEnglish":"E",
-        "surnameEnglish":"EE",
-        "isActive":true,
-        "updatedUserId":1
-    }
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTk1MTkxMjh9.Jn65tM8FbTUX96cre07PU-mQJmztnnDtOcaYZfywhp8
+Accept-Language: en_US
