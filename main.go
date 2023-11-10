@@ -31,9 +31,9 @@ func initTimeZone() {
 func initDatabase() *gorm.DB {
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Asia%%2FBangkok",
 		"root",
-		"P@ssw0rd",
+		"root",
 		"localhost",
-		"3306",
+		"3307",
 		"mysqldb",
 	)
 	sqlDB, err := sql.Open("mysql", dsn)
