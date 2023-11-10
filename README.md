@@ -6,6 +6,23 @@ This project is a sample project that contains following features:
 - REST API server with [Gin Framework](https://github.com/gin-gonic/gin)
 - Database integration using [GORM](http://gorm.io/)
 - JWT Token based Authentication
+- N-tier Architecture
+
+## Project Setup
+
+```
+$ go get github.com/jinzhu/gorm
+```
+
+GORM should be installed via `go get`.
+
+## MySql Database Setup
+
+```
+$ docker-compose up
+```
+
+MySql is implemented in Docker Compose. Docker should be installed first [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
 ## Start Project
 
@@ -13,8 +30,3 @@ This project is a sample project that contains following features:
 $ go run main.go
 ```
 
-Set up MySql Database:
-
-```
-$ docker-compose up
-```
