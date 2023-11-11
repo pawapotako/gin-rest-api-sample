@@ -2,14 +2,16 @@ package util
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/golang-jwt/jwt"
 )
 
-func GenerateToken() (*string, error) {
+func GenerateToken(userId uint) (*string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.StandardClaims{
+		Subject:   strconv.Itoa(int(userId)),
 		ExpiresAt: time.Now().Add(5 * time.Minute).Unix(),
 	})
 

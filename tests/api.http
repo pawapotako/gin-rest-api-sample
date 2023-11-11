@@ -7,60 +7,8 @@
 GET http://{{host}}:{{port}}/health-check
 Accept-Language: en_US
 
-### POST /covid/summary
-POST http://{{host}}:{{port}}/covid/summary
-Content-Type: application/json
-Accept-Language: en_US
-
-{
-    "data": [
-      {
-        "confirmDate": "2021-05-04",
-        "no": null,
-        "age": 51,
-        "gender": "หญิง",
-        "genderEn": "Female",
-        "nation": null,
-        "nationEn": "China",
-        "province": "Phrae",
-        "provinceId": 46,
-        "district": null,
-        "provinceEn": "Phrae",
-        "statQuarantine": 5
-      },
-      {
-        "confirmDate": "2021-05-01",
-        "no": null,
-        "age": 51,
-        "gender": "ชาย",
-        "genderEn": "Male",
-        "nation": null,
-        "nationEn": "India",
-        "province": "Suphan Buri",
-        "provinceId": 65,
-        "district": null,
-        "provinceEn": "Suphan Buri",
-        "statQuarantine": 8
-      },
-      {
-        "confirmDate": "2021-05-01",
-        "no": null,
-        "age": 79,
-        "gender": null,
-        "genderEn": null,
-        "nation": null,
-        "nationEn": "India",
-        "province": "Roi Et",
-        "provinceId": 53,
-        "district": null,
-        "provinceEn": "Roi Et",
-        "statQuarantine": 1
-      }
-    ]
-  }
-
-### POST /authentications/sign-in
-POST http://{{host}}:{{port}}/{{api_version_v1}}/{{authenticationEndpoint}}/sign-in
+### POST /authentications/sign-up
+POST http://{{host}}:{{port}}/{{api_version_v1}}/{{authenticationEndpoint}}/sign-up
 Content-Type: application/json
 Accept-Language: en_US
 

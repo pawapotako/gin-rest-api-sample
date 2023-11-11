@@ -4,10 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 	"go-project/handler"
+	"go-project/model"
+	"go-project/util"
 	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -15,8 +18,9 @@ import (
 func main() {
 
 	initTimeZone()
-	db := initDatabase()
-	initRouter(db)
+	config := util.LoadConfig()
+	db := initDatabase(config)
+	initRouter(db, config)
 }
 
 func initTimeZone() {
@@ -28,13 +32,14 @@ func initTimeZone() {
 	time.Local = ict
 }
 
-func initDatabase() *gorm.DB {
+func initDatabase(config util.Config) *gorm.DB {
+
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Asia%%2FBangkok",
-		"root",
-		"root",
-		"localhost",
-		"3307",
-		"mysqldb",
+		config.DbUsername,
+		config.DbPassword,
+		config.DbHost,
+		config.DbPort,
+		config.DbDatabase,
 	)
 	sqlDB, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -48,15 +53,25 @@ func initDatabase() *gorm.DB {
 		log.Fatal("cannot open db ", err)
 	}
 
+	migration(db)
+
 	return db
 }
 
-func initRouter(db *gorm.DB) {
+func migration(db *gorm.DB) {
+
+	if err := db.AutoMigrate(&model.UserModel{}); err != nil {
+		log.Fatal("cannot auto migrate db", err)
+	}
+}
+
+func initRouter(db *gorm.DB, config util.Config) {
 
 	gin := gin.Default()
+	validator := validator.New()
 
 	handler.InitDefaultHandler(gin)
-	handler.InitAuthenticationHandler(db, gin)
+	handler.InitAuthenticationHandler(db, gin, validator)
 
-	gin.Run()
+	gin.Run(":" + config.AppPort)
 }

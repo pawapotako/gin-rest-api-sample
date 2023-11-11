@@ -14,6 +14,7 @@ func AuthorizationMiddleware(c *gin.Context) {
 	token := strings.TrimPrefix(authorization, "Bearer ")
 
 	if err := util.ValidateToken(token); err != nil {
-		c.JSON(http.StatusUnauthorized, err)
+		util.ErrorHandler(c, http.StatusUnauthorized, err)
+		return
 	}
 }

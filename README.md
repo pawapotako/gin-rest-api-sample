@@ -6,12 +6,13 @@ This project is a sample project that contains following features:
 - REST API server with [Gin Framework](https://github.com/gin-gonic/gin)
 - Database integration using [GORM](http://gorm.io/)
 - JWT Token based Authentication
-- N-tier Architecture
+- N Tier Architecture [N Tier Architecture Concept](https://stackify.com/n-tier-architecture/)
 
 ## Project Setup
 
 ```
 $ go get github.com/jinzhu/gorm
+$ go get github.com/spf13/viper
 ```
 
 GORM should be installed via `go get`.
