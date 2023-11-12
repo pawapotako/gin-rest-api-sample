@@ -7,6 +7,7 @@ import (
 	"go-project/model"
 	"go-project/util"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -35,11 +36,11 @@ func initTimeZone() {
 func initDatabase(config util.Config) *gorm.DB {
 
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8&parseTime=True&loc=Asia%%2FBangkok",
-		config.DbUsername,
-		config.DbPassword,
-		config.DbHost,
-		config.DbPort,
-		config.DbDatabase,
+		config.DB.Username,
+		config.DB.Password,
+		config.DB.Host,
+		config.DB.Port,
+		config.DB.Database,
 	)
 	sqlDB, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -73,5 +74,5 @@ func initRouter(db *gorm.DB, config util.Config) {
 	handler.InitDefaultHandler(gin)
 	handler.InitAuthenticationHandler(db, gin, validator)
 
-	gin.Run(":" + config.AppPort)
+	gin.Run(":" + strconv.Itoa(config.App.Port))
 }
