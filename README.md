@@ -11,6 +11,7 @@ This project is a sample project that contains following features:
 ## Project Setup
 
 ```
+$ go get github.com/gin-gonic/gin
 $ go get github.com/jinzhu/gorm
 $ go get github.com/spf13/viper
 $ go get github.com/stretchr/testify/mock
