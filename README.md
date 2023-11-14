@@ -13,6 +13,7 @@ This project is a sample project that contains following features:
 ```
 $ go get github.com/jinzhu/gorm
 $ go get github.com/spf13/viper
+$ go get github.com/stretchr/testify/mock
 ```
 
 GORM should be installed via `go get`.

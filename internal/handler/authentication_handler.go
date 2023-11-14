@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"go-project/middleware"
-	"go-project/model"
-	"go-project/repository"
-	"go-project/service"
-	"go-project/util"
+	"go-project/internal/middleware"
+	"go-project/internal/model"
+	"go-project/internal/repository"
+	"go-project/internal/service"
+	"go-project/internal/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,9 +20,8 @@ type authenticationHandler struct {
 
 func InitAuthenticationHandler(db *gorm.DB, e *gin.Engine, validator *validator.Validate) {
 
-	externalServiceRepo := repository.NewExternalServiceRepositoryDB(db)
 	userRepo := repository.NewUserRepositoryDB(db)
-	service := service.NewAuthenticationService(externalServiceRepo, userRepo)
+	service := service.NewAuthenticationService(userRepo)
 	handler := authenticationHandler{service, validator}
 
 	v1 := e.Group("/v1")

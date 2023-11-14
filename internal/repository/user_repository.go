@@ -2,7 +2,7 @@ package repository
 
 import (
 	"fmt"
-	"go-project/model"
+	"go-project/internal/model"
 
 	"gorm.io/gorm"
 )
@@ -12,14 +12,14 @@ type userRepositoryDB struct {
 }
 
 type UserRepository interface {
-	Insert(entity model.UserModel) (*model.UserModel, error)
+	Create(entity model.UserModel) (*model.UserModel, error)
 }
 
 func NewUserRepositoryDB(db *gorm.DB) UserRepository {
 	return userRepositoryDB{db}
 }
 
-func (r userRepositoryDB) Insert(entity model.UserModel) (*model.UserModel, error) {
+func (r userRepositoryDB) Create(entity model.UserModel) (*model.UserModel, error) {
 
 	entityOriginal := model.UserModel{}
 	err := r.db.Where("username = ?", entity.Username).First(&entityOriginal).Error

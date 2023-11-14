@@ -3,9 +3,9 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"go-project/handler"
-	"go-project/model"
-	"go-project/util"
+	"go-project/internal/handler"
+	"go-project/internal/model"
+	"go-project/internal/util"
 	"log"
 	"strconv"
 	"time"

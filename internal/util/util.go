@@ -1,8 +1,11 @@
 package util
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -34,4 +37,9 @@ func ValidateToken(token string) error {
 	})
 
 	return err
+}
+
+func ConvertObjToStringReader[T any](obj T) io.Reader {
+	result, _ := json.Marshal(&obj)
+	return strings.NewReader(string(result))
 }

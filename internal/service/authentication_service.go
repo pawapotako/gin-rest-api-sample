@@ -1,9 +1,9 @@
 package service
 
 import (
-	"go-project/model"
-	"go-project/repository"
-	"go-project/util"
+	"go-project/internal/model"
+	"go-project/internal/repository"
+	"go-project/internal/util"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -13,15 +13,13 @@ type AuthenticationService interface {
 }
 
 type authenticationService struct {
-	externalServiceRepo repository.ExternalServiceRepository
-	userRepo            repository.UserRepository
+	userRepo repository.UserRepository
 }
 
-func NewAuthenticationService(externalServiceRepo repository.ExternalServiceRepository, userRepo repository.UserRepository) AuthenticationService {
+func NewAuthenticationService(userRepo repository.UserRepository) AuthenticationService {
 
 	return authenticationService{
-		externalServiceRepo: externalServiceRepo,
-		userRepo:            userRepo,
+		userRepo: userRepo,
 	}
 }
 
@@ -39,7 +37,7 @@ func (s authenticationService) SignUp(request model.DefaultPayload[model.SignUpR
 		Password: string(hashedPassword),
 	}
 
-	response, err := s.userRepo.Insert(entity)
+	response, err := s.userRepo.Create(entity)
 	if err != nil {
 		return nil, err
 	}

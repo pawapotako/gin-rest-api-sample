@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"go-project/util"
+	"go-project/internal/util"
 	"net/http"
 	"strings"
 
