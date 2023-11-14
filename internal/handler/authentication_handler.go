@@ -21,7 +21,8 @@ type authenticationHandler struct {
 func InitAuthenticationHandler(db *gorm.DB, e *gin.Engine, validator *validator.Validate) {
 
 	userRepo := repository.NewUserRepositoryDB(db)
-	service := service.NewAuthenticationService(userRepo)
+	externalRepo := repository.NewExternalRepositoryDB(db)
+	service := service.NewAuthenticationService(userRepo, externalRepo)
 	handler := authenticationHandler{service, validator}
 
 	v1 := e.Group("/v1")

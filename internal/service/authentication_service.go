@@ -13,13 +13,15 @@ type AuthenticationService interface {
 }
 
 type authenticationService struct {
-	userRepo repository.UserRepository
+	userRepo     repository.UserRepository
+	externalRepo repository.ExternalRepository
 }
 
-func NewAuthenticationService(userRepo repository.UserRepository) AuthenticationService {
+func NewAuthenticationService(userRepo repository.UserRepository, externalRepo repository.ExternalRepository) AuthenticationService {
 
 	return authenticationService{
-		userRepo: userRepo,
+		userRepo:     userRepo,
+		externalRepo: externalRepo,
 	}
 }
 
@@ -41,6 +43,13 @@ func (s authenticationService) SignUp(request model.DefaultPayload[model.SignUpR
 	if err != nil {
 		return nil, err
 	}
+
+	userStreaming := model.UserStreaming{
+		UserId:   response.Id,
+		Username: response.Username,
+	}
+
+	s.externalRepo.EventStreaming(userStreaming)
 
 	jwtToken, err := util.GenerateToken(response.Id)
 	if err != nil {

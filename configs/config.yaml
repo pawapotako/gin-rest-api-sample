@@ -8,3 +8,9 @@ db:
     database: mysqldb
     username: root
     password: root
+
+kafka:
+    host: localhost
+    port: 9092
+    topic: user
+

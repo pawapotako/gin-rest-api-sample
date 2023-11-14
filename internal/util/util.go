@@ -43,3 +43,8 @@ func ConvertObjToStringReader[T any](obj T) io.Reader {
 	result, _ := json.Marshal(&obj)
 	return strings.NewReader(string(result))
 }
+
+func CompressToJsonBytes(obj any) []byte {
+	raw, _ := json.Marshal(obj)
+	return raw
+}

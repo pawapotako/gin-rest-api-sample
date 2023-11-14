@@ -8,8 +8,9 @@ import (
 )
 
 type Config struct {
-	App AppConfig
-	DB  DatabaseConfig
+	App   AppConfig
+	DB    DatabaseConfig
+	Kafka KafkaConfig
 }
 
 type AppConfig struct {
@@ -23,6 +24,12 @@ type DatabaseConfig struct {
 	Database string
 	Username string
 	Password string
+}
+
+type KafkaConfig struct {
+	Host  string
+	Port  int
+	Topic string
 }
 
 func LoadConfig() Config {
