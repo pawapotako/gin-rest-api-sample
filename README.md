@@ -6,7 +6,7 @@ This project is a sample project that contains following features:
 - REST API server with [Gin Framework](https://github.com/gin-gonic/gin)
 - Database integration using [GORM](http://gorm.io/)
 - JWT Token based Authentication
-- N Tier Architecture [N Tier Architecture Concept](https://stackify.com/n-tier-architecture/)
+- Architecture design with [N Tier Architecture Concept](https://stackify.com/n-tier-architecture/)
 
 ## Project Setup
 
